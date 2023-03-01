@@ -17,27 +17,32 @@
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <div id="root"></div>
+    <!-- <script>
+      const rootElement = document.getElementById("root");
+
+      const random = () => {
+        const number = Math.floor(Math.random() * (10 - 1) + 1);
+        const element = `<button>${number}</button>`;
+        rootElement.innerHTML = element;
+      };
+
+      setInterval(random, 1000);
+    </script> -->
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      function Number({ number, selected }) {
-        return selected ? <h1>{number}</h1> : <h3>{number}</h3>;
-      }
+      const random = () => {
+        const number = Math.floor(Math.random() * (10 - 1) + 1);
+        const element = (
+          <>
+            <button>{number}</button>
+            <button>{number}</button>
+          </>
+        );
+        ReactDOM.render(element, rootElement);
+      };
 
-      const element = (
-        <>
-          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-            <Number number={item} selected={item === 3} />
-          ))}
-        </>
-      );
-
-      ReactDOM.render(element, rootElement);
+      setInterval(random, 1000);
     </script>
-    <style>
-      .title {
-        color: "red";
-      }
-    </style>
   </body>
 </html>

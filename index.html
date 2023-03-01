@@ -7,6 +7,7 @@
     <title>Static Template</title>
   </head>
   <body>
+    <div id="root"></div>
     <script
       crossorigin
       src="https://unpkg.com/react@17/umd/react.development.js"
@@ -16,32 +17,18 @@
       src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <div id="root"></div>
-    <!-- <script>
-      const rootElement = document.getElementById("root");
 
-      const random = () => {
-        const number = Math.floor(Math.random() * (10 - 1) + 1);
-        const element = `<button>${number}</button>`;
-        rootElement.innerHTML = element;
-      };
-
-      setInterval(random, 1000);
-    </script> -->
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      function tick() {
-        const element = (
-          <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-          </div>
-        );
-        ReactDOM.render(element, document.getElementById("root"));
-      }
-
-      setInterval(tick, 1000);
+      const handleClick = () => alert("pressed");
+      const handleMouseOut = () => alert("bye");
+      const element = (
+        <button onClick={handleClick} onMouseOut={handleMouseOut}>
+          Press
+        </button>
+      );
+      ReactDOM.render(element, rootElement);
     </script>
   </body>
 </html>

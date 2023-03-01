@@ -31,23 +31,17 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-
-      const random = () => {
-        const number = Math.floor(Math.random() * (10 - 1) + 1);
+      function tick() {
         const element = (
-          <>
-            <button>{number}</button>
-            <button>{number}</button>
-          </>
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+          </div>
         );
-        ReactDOM.render(element, rootElement);
-      };
-
-    </script>
-    <style>
-      .title {
-        color: "red";
+        ReactDOM.render(element, document.getElementById("root"));
       }
-    </style>
+
+      setInterval(tick, 1000);
+    </script>
   </body>
 </html>

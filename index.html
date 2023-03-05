@@ -21,67 +21,48 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      const todos = [
-        [
-          { id: 1, value: "Wash Dishes" },
-          { id: 2, value: "Clean the bed" },
-          { id: 3, value: "Running" },
-          { id: 4, value: "Learning" }
-        ],
-        [
-          { id: 4, value: "Learning" },
-          { id: 1, value: "Wash Dishes" },
-          { id: 2, value: "Clean the bed" },
-          { id: 3, value: "Running" }
-        ],
-        [
-          { id: 3, value: "Running" },
-          { id: 1, value: "Wash Dishes" },
-          { id: 2, value: "Clean the bed" },
-          { id: 4, value: "Learning" }
-        ],
-        [
-          { id: 2, value: "Clean the bed" },
-          { id: 1, value: "Wash Dishes" },
-          { id: 3, value: "Running" },
-          { id: 4, value: "Learning" }
-        ]
-      ];
-
-      const App = () => {
-        const handleDoneClick = (todo) => {
-          setItems((items) => items.filter((i) => i !== todo));
-        };
-        const handleRestore = () => {
-          setItems((items) => [
-            ...items,
-            todos.find((item) => !items.includes(item))
-          ]);
-        };
-
-        const [items, setItems] = React.useState(todos[0]);
-        React.useEffect(() => {
-          const interval = setInterval(() => {
-            const random = Math.floor(Math.random() * 3);
-            setItems(todos[random]);
-          }, 1000);
-
-          return () => {
-            clearInterval(interval);
-          };
-        }, []);
+      const Id = ({ handleIdChange }) => {
         return (
           <>
-            {items.map((todo, index) => (
-              <div key={index}>
-                <button onClick={() => handleDoneClick(todo)}>
-                  {todo.value}
-                </button>
-              </div>
-            ))}
-            <br />
-            <br />
-            <button onClick={handleRestore}>Restore</button>
+            <label>ID : </label>
+            <input onChange={handleIdChange} />
+          </>
+        );
+      };
+      const Password = ({ handlePasswordChange }) => {
+        return (
+          <>
+            <label>PW : </label>
+            <input type="password" onChange={handlePasswordChange} />
+          </>
+        );
+      };
+
+      const App = () => {
+        const [id, setId] = React.useState("");
+        const [password, setPassword] = React.useState("");
+
+        const handlePasswordChange = (event) => {
+          setPassword(event.target.value);
+        };
+        const handleIdChange = (event) => {
+          setId(event.target.value);
+        };
+        const handleLoginClick = () => {
+          alert(`id: ${id}, pw : ${password}`);
+        };
+        return (
+          <>
+            <form>
+              <Id handleIdChange={handleIdChange} />
+              <Password handlePasswordChange={handlePasswordChange} />
+              <button
+                disabled={!(id.length > 0 && password.length > 0)}
+                onClick={handleLoginClick}
+              >
+                LOGIN
+              </button>
+            </form>
           </>
         );
       };
